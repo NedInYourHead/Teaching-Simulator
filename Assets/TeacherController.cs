@@ -37,6 +37,12 @@ public class TeacherController : MonoBehaviour
         {
             transform.position = transform.position + (transform.up * vertical * speed);
         }
-
+    }
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "SlideIncreaser")
+        {
+            Debug.Log("Teaching class...");
+        }
     }
 }
