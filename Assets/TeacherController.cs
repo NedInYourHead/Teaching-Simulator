@@ -6,6 +6,7 @@ public class TeacherController : MonoBehaviour
 {
     private string movePriority;
 
+
     private float vertical;
     [SerializeField] private float speed = 0.2f;
 
@@ -36,13 +37,6 @@ public class TeacherController : MonoBehaviour
         if (movePriority == "y" || horizontal == 0f)
         {
             transform.position = transform.position + (transform.up * vertical * speed);
-        }
-    }
-    void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "SlideIncreaser")
-        {
-            Debug.Log("Teaching class...");
         }
     }
 }
