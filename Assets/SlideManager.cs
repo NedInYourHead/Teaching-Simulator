@@ -8,7 +8,8 @@ public class SlideManager : MonoBehaviour
     private bool isTeaching;
     [SerializeField] private float teachingSpeed;
     [SerializeField] private float slidePercent = 0f;
-    [SerializeField] private int slideNum = 0;
+    [SerializeField] private float slideNum = 0;
+    [SerializeField] private int slideTotal = 10;
     [SerializeField] Text slideNumView;
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -21,11 +22,11 @@ public class SlideManager : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (isTeaching && (slidePercent < 100f))
+        if (isTeaching && (slideNum < slideTotal))
         {
             slidePercent += (0.01f * teachingSpeed) ;
         }
-        slideNum = (int) slidePercent/10;
-        slideNumView.text = slideNum.ToString() + "/10";
+        slideNum = (int) (slidePercent/(100f/slideTotal));
+        slideNumView.text = slideNum.ToString() + "/" + slideTotal;
     }
 }
