@@ -16,7 +16,7 @@ public class SlideManager : MonoBehaviour
 
     private void Start()
     {
-        slideSlider.maxValue = slideTotal;
+        percentSlider.maxValue = slideTotal;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,8 +42,8 @@ public class SlideManager : MonoBehaviour
     private void Update()
     {
         //display the slide progress
-        slideNumView.text = slideNum.ToString() + "/" + slideTotal;
-        percentSlider.value = slidePercent;
-        slideSlider.value = slideNum;
+        slideNumView.text = slideNum.ToString() + "/" + slideTotal + " Slides";
+        slideSlider.value = slidePercent;
+        percentSlider.value = slideNum+1;
     }
 }
