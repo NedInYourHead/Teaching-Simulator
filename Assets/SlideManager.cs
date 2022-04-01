@@ -11,22 +11,39 @@ public class SlideManager : MonoBehaviour
     [SerializeField] private float slideNum = 0;
     [SerializeField] private int slideTotal = 10;
     [SerializeField] Text slideNumView;
+    [SerializeField] private Slider percentSlider;
+    [SerializeField] private Slider slideSlider;
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
+    {
+        slideSlider.maxValue = slideTotal;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         isTeaching = true;
     }
-    void OnTriggerExit2D(Collider2D collision)
+    
+    private void OnTriggerExit2D(Collider2D collision)
     {
         isTeaching = false;
     }
-    void FixedUpdate()
+    
+    private void FixedUpdate()
     {
+        //increment the slide percentage
         if (isTeaching && (slideNum < slideTotal))
         {
             slidePercent += (0.01f * teachingSpeed) ;
         }
         slideNum = (int) (slidePercent/(100f/slideTotal));
+    }
+
+    private void Update()
+    {
+        //display the slide progress
         slideNumView.text = slideNum.ToString() + "/" + slideTotal;
+        percentSlider.value = slidePercent;
+        slideSlider.value = slideNum;
     }
 }
