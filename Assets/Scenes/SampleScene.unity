@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f855add582f4764cb1995445f000b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lessonLengthSeconds: 20
+  lessonLengthSeconds: 60
   clockHand: {fileID: 1273523988}
 --- !u!4 &441288104
 Transform:
@@ -1838,10 +1838,12 @@ MonoBehaviour:
   teachingSpeed: 20
   slidePercent: 0
   slideNum: 0
-  slideTotal: 7
+  slideTotal: 10
   slideNumView: {fileID: 508395419}
   percentSlider: {fileID: 487944298}
   slideSlider: {fileID: 45934408}
+  progressBar: {fileID: 487944296}
+  hideProgressBar: 1
 --- !u!1 &1818647642
 GameObject:
   m_ObjectHideFlags: 0

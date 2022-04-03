@@ -13,7 +13,8 @@ public class SlideManager : MonoBehaviour
     [SerializeField] Text slideNumView;
     [SerializeField] private Slider percentSlider;
     [SerializeField] private Slider slideSlider;
-
+    [SerializeField] private GameObject progressBar;
+    [SerializeField] private bool hideProgressBar;
     private void Start()
     {
         percentSlider.maxValue = slideTotal;
@@ -31,6 +32,11 @@ public class SlideManager : MonoBehaviour
     
     private void FixedUpdate()
     {
+        //shows/hides progressbar
+        if (hideProgressBar)
+        {
+            progressBar.SetActive(isTeaching);
+        }
         //increment the slide percentage
         if (isTeaching && (slideNum < slideTotal))
         {
