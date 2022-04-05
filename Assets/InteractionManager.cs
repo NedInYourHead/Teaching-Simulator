@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class InteractionManager : MonoBehaviour
 {
-    SpriteRenderer spriteRenderer;
+    StudentBehaviour behaviour;
     private bool isTouching;
 
     private void Start()
     {
-        spriteRenderer = GetComponentInParent<SpriteRenderer>();
+        behaviour = GetComponentInParent<StudentBehaviour>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -23,13 +23,9 @@ public class InteractionManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isTouching)
+        if (isTouching && behaviour.GetBehaviour() != "normal")
         {
-            spriteRenderer.color = Color.red;
-        }
-        else
-        {
-            spriteRenderer.color = Color.white;
+            behaviour.SetNormal();
         }
     }
 }
