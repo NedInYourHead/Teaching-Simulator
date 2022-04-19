@@ -10,8 +10,8 @@ public class StudentBehaviour : MonoBehaviour
 
     [SerializeField] private Text icon;
 
-    private float minTime = 20;
-    private float maxTime = 60;
+    private float minTime = 10;
+    private float maxTime = 130;
     private float timeUntilAbnormal = 0f;
 
     void Start()
