@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class StudentBehaviour : MonoBehaviour
 {
     private float learningSpeed;
+    private float pointInLesson = 0f;
+    private float lastPointInLesson = 0f;
     private string currentBehaviour;
     private string newBehaviour;
     private bool isHighlighted = false;
 
-    //[SerializeField] private SlideManager lesson;
+    [SerializeField] private SlideManager lesson;
 
     [SerializeField] private Text icon;
     [SerializeField] private int sleepChance = 3;
@@ -26,16 +28,15 @@ public class StudentBehaviour : MonoBehaviour
     [SerializeField] private string[] behaviorChance;
     [SerializeField] private float minTime;
     [SerializeField] private float maxTime;
-    private float timeUntilAbnormal = 0f;
+    private float behaviourPointInLesson = 0f;
 
     void Start()
     {
         totalChance = sleepChance + talkChance + handUpChance;
         behaviourFreq = (timesInLesson / (float)totalChance) * 100f;
-        Debug.Log(totalChance);
 
-        minTime = Mathf.Max(3f, behaviourFreq - inconsistency);
-        maxTime = Mathf.Min(behaviourFreq + inconsistency, 150f);
+        minTime = Mathf.Clamp(1f, behaviourFreq - inconsistency, 150f);
+        maxTime = Mathf.Clamp(1f, behaviourFreq + inconsistency, 150f);
         Debug.Log(minTime + "   " + maxTime);
 
         behaviorChance = new string[totalChance];
@@ -53,21 +54,22 @@ public class StudentBehaviour : MonoBehaviour
             behaviorChance[i] = "handUp";
         }
 
-
-        
         SetNormal();
     }
 
-    void FixedUpdate()
+    void Update()
     {
+        lastPointInLesson = pointInLesson;
+        pointInLesson = lesson.GetSlidePercent();
+
         if (currentBehaviour == "normal")
         {
-            if (timeUntilAbnormal <= 0)
+            if ((lastPointInLesson < behaviourPointInLesson) && (behaviourPointInLesson < pointInLesson))
             {
                 newBehaviour = behaviorChance[Random.Range(0, totalChance)];
             }
-            timeUntilAbnormal -= Time.deltaTime;
         }
+
         if (newBehaviour == "sleeping")
         {
             SetSleeping();
@@ -99,9 +101,14 @@ public class StudentBehaviour : MonoBehaviour
 
     public void SetNormal()
     {
-        learningSpeed = 100f;
+        learningSpeed = 1f;
         currentBehaviour = "normal";
-        timeUntilAbnormal = Random.Range(minTime, maxTime);
+        behaviourPointInLesson = 100f;
+        while (behaviourPointInLesson == 100f)
+        {
+            behaviourPointInLesson = pointInLesson + Random.Range(minTime, maxTime);
+        }
+        Debug.Log(behaviourPointInLesson);
     }
     
     public void SetSleeping()
@@ -112,13 +119,13 @@ public class StudentBehaviour : MonoBehaviour
 
     public void SetTalking()
     {
-        learningSpeed = 25f;
+        learningSpeed = 0.25f;
         currentBehaviour = "talking";
     }
 
     public void SetHandUp()
     {
-        learningSpeed = 75f;
+        learningSpeed = 0.75f;
         currentBehaviour = "handUp";
     }
     public void IconHighlight(bool highlight)

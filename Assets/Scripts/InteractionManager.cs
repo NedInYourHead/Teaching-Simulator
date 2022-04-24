@@ -25,7 +25,7 @@ public class InteractionManager : MonoBehaviour
 
     void Update()
     {
-        if (isTouching && behaviour.GetBehaviour() != "normal" && Input.GetKeyDown("z"))
+        if (isTouching && behaviour.GetBehaviour() != "normal" && (Input.GetAxis("Fire1") > 0))
         {
             behaviour.SetNormal();
         }

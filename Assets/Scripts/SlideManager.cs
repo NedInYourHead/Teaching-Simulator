@@ -24,19 +24,20 @@ public class SlideManager : MonoBehaviour
     [SerializeField] private string[] slideKeys;
     private string currentKey;
     private bool keyIsPressed = false;
-    
+    [SerializeField] private bool inputIncreasesSlides = false;
 
     private void Start()
     {
-        percentSlider.maxValue = slideTotal;
+        slideSlider.maxValue = slideTotal;
 
-        slideKeys = new string[slideTotal];
+        slideKeys = new string[slideTotal+1];
 
         for (int i = 0; i < slideTotal; i++)
         {
             slideKeys[i] = keyList[Random.Range(0, keyList.Length)];
         }
-        Debug.Log(slideKeys[0]);
+        slideKeys[slideTotal] = "Lesson Complete";
+        Debug.Log(slideKeys[slideTotal]);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -57,14 +58,29 @@ public class SlideManager : MonoBehaviour
         {
             currentKey = slideKeys[slideNum];
             nextSlide += 1;
-            percentSlider.value = nextSlide;
+            slideSlider.value = nextSlide;
         }
 
-        keyIsPressed = Input.GetKey(currentKey);
+        if (slideNum < slideTotal)
+        {
+            if (!inputIncreasesSlides)
+            {
+                keyIsPressed = Input.GetKey(currentKey);
+            }
+            else
+            {
+                keyIsPressed = (Input.GetAxis("Fire1") > 0);
+            }
+        }
+        else
+        {
+            slidePercent = 100f;
+            keyIsPressed = false;
+        }
 
         //display all the things
         slideNumView.text = slideNum.ToString() + "/" + slideTotal + " Slides";
-        slideSlider.value = slidePercent;
+        percentSlider.value = slidePercent;
         keyView.text = currentKey;
     }
 
@@ -80,5 +96,10 @@ public class SlideManager : MonoBehaviour
         {
             slidePercent += (0.01f * teachingSpeed);
         }
+    }
+
+    public float GetSlidePercent()
+    {
+        return slidePercent;
     }
 }
