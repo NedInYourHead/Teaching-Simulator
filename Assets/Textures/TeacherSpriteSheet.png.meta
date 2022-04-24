@@ -50,6 +50,27 @@ TextureImporter:
   - first:
       213: 3684275638038604388
     second: TeacherSpriteSheet_15
+  - first:
+      213: 8781931892867878755
+    second: TeacherSpriteSheet_16
+  - first:
+      213: 4551511134142653513
+    second: TeacherSpriteSheet_18
+  - first:
+      213: 6331272135101013181
+    second: TeacherSpriteSheet_19
+  - first:
+      213: 7428555179475323435
+    second: TeacherSpriteSheet_21
+  - first:
+      213: -3495500172868473195
+    second: TeacherSpriteSheet_22
+  - first:
+      213: 8826215728629920436
+    second: TeacherSpriteSheet_24
+  - first:
+      213: 8116323935194703728
+    second: TeacherSpriteSheet_25
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -90,7 +111,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -247,90 +268,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TeacherSpriteSheet_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1500
-        width: 750
-        height: 750
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78b936536a6a00a80800000000000000
-      internalID: -8502612863684994169
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TeacherSpriteSheet_5
-      rect:
-        serializedVersion: 2
-        x: 750
-        y: 1500
-        width: 750
-        height: 750
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f25cc229b2bc8dd80800000000000000
-      internalID: -8225601331395771089
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TeacherSpriteSheet_6
-      rect:
-        serializedVersion: 2
-        x: 1500
-        y: 1500
-        width: 750
-        height: 750
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 378f2f8f1704010f0800000000000000
-      internalID: -1148347046727321485
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TeacherSpriteSheet_7
-      rect:
-        serializedVersion: 2
-        x: 2250
-        y: 1500
-        width: 750
-        height: 750
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5637ee801cc033920800000000000000
-      internalID: 2968730602585355109
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: TeacherSpriteSheet_8
       rect:
         serializedVersion: 2
@@ -415,6 +352,111 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: TeacherSpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 2250
+        y: 0
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46aaae33c2d212330800000000000000
+      internalID: 3684275638038604388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TeacherSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1500
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78b936536a6a00a80800000000000000
+      internalID: -8502612863684994169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TeacherSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 1500
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f25cc229b2bc8dd80800000000000000
+      internalID: -8225601331395771089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TeacherSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1500
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 378f2f8f1704010f0800000000000000
+      internalID: -1148347046727321485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TeacherSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 2250
+        y: 1500
+        width: 750
+        height: 750
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5637ee801cc033920800000000000000
+      internalID: 2968730602585355109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: TeacherSpriteSheet_12
       rect:
         serializedVersion: 2
@@ -473,27 +515,6 @@ TextureImporter:
       bones: []
       spriteID: 17a56a840f8a41f50800000000000000
       internalID: 6851286683101846129
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TeacherSpriteSheet_15
-      rect:
-        serializedVersion: 2
-        x: 2250
-        y: 0
-        width: 750
-        height: 750
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 46aaae33c2d212330800000000000000
-      internalID: 3684275638038604388
       vertices: []
       indices: 
       edges: []

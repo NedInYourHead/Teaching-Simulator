@@ -13,10 +13,15 @@ public class TeacherController : MonoBehaviour
     [SerializeField] private float speed = 0.2f;
 
     private float horizontal;
-    
+
+    private SpriteRenderer teacherRenderer;
+    private SpriteRenderer shadowRenderer;
+
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
+        teacherRenderer = GetComponentInChildren<SpriteRenderer>();
+        shadowRenderer = GetComponent<SpriteRenderer>();
     }
 
     void PlayAnim(string newState)
@@ -78,6 +83,31 @@ public class TeacherController : MonoBehaviour
         else
         {
             animator.speed = 1f;
+        }
+    }
+
+    void Update()
+    {
+        teacherRenderer.sortingOrder = shadowRenderer.sortingOrder;
+    }
+    
+    void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.tag == "LayerBack")
+        {
+            shadowRenderer.sortingOrder = -6;
+        }
+        else if (collider.tag == "LayerMiddle")
+        {
+            shadowRenderer.sortingOrder = -4;
+        }
+        else if (collider.tag == "LayerForward")
+        {
+            shadowRenderer.sortingOrder = -2;
+        }
+        else if (collider.tag == "LayerFront")
+        {
+            shadowRenderer.sortingOrder = 0;
         }
     }
 }
