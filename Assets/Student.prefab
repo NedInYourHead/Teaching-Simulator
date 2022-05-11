@@ -45,7 +45,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.2118988, y: 0.9494438}
+  m_Offset: {x: 0.2118988, y: 0.5121324}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -56,7 +56,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 26.551643, y: 17.532246}
+  m_Size: {x: 26.551643, y: 16.657623}
   m_EdgeRadius: 0
 --- !u!114 &4627725718940794833
 MonoBehaviour:
@@ -80,7 +80,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3164816793823545797}
   - component: {fileID: 3164816793823545796}
-  - component: {fileID: -2923550431080258439}
+  - component: {fileID: 635790508619199360}
   - component: {fileID: 7459232100311379543}
   m_Layer: 0
   m_Name: Student
@@ -157,7 +157,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-2923550431080258439
+--- !u!114 &635790508619199360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,18 +166,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3164816793823545798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f941570a859feba4b983d41944804305, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c33b8b6edb5ed2458c89fa992f54f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lesson: {fileID: 0}
+  inkJSON: {fileID: 4900000, guid: 3e38e022d08de784bbfda677d9b5bc7b, type: 3}
   icon: {fileID: 0}
-  sleepChance: 1
-  talkChance: 0
-  handUpChance: 0
-  inconsistency: 0
-  behaviorChance: []
-  minTime: 0
-  maxTime: 0
+  studentNum: 10
+  maxLearningSpeed: 0.8
+  hookBehaviour: 0
+  hookDiscovered: 0
+  sleepChance: 15
+  talkChance: 15
+  handUpConfidence: 0.2
+  handUpThreshold: 5
+  handUpPatience: 10
+  handDownDiscouragement: 0.9
+  handDownSleepChance: 45
+  AnswerBonus: 10
+  hasHandBeenUp: 0
+  chancePerBehaviour: 1
+  chance: 
 --- !u!61 &7459232100311379543
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -275,7 +283,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 3adcf53bdc0c7ca4daf61030d4e0aa81, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

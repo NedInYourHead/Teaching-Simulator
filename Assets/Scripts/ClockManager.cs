@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClockManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ClockManager : MonoBehaviour
     private float currentSeconds;
     private float rotationAmount;
     private bool inLesson = true;
+    [SerializeField] private StudentDataManager studentDataManager;
 
     void Start()
     {
@@ -20,9 +22,9 @@ public class ClockManager : MonoBehaviour
     {
         if (currentSeconds > lessonLengthSeconds && inLesson)
         {
-            Debug.Log("Lesson Over");
-            inLesson = false;
-            Time.timeScale = 0;
+            studentDataManager.EndLesson();
+            //UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
         else
         {
