@@ -1,7 +1,7 @@
 VAR myBehaviour = -> normal
 VAR isBehind = true
 VAR questionSlide = "A"
-VAR studentName = "Student 10"
+VAR studentName = "Tariq"
 
 -> myBehaviour
 
@@ -14,8 +14,8 @@ VAR studentName = "Student 10"
 
 === normal ===
 {~*Is frantically taking notes*|Hello sir!|Yes?}
-    * How are you doing?
-       I'm doing {~fine|great|amazing}, {~sir|thank you very much}
+    * Did you see that ludicrous display last night?
+       What was Wenger thinking, sending Walcott on that early?
        * * [\* go back to teaching*] you go back to teaching
         ->DONE
     

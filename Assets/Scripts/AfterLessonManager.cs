@@ -5,7 +5,6 @@ using UnityEngine;
 public class AfterLessonManager : MonoBehaviour
 {
     private AfterLessonIcon[] students;
-    private
 
     void Awake()
     {

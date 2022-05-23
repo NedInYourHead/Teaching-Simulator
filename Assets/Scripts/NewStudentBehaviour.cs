@@ -7,9 +7,7 @@ public class NewStudentBehaviour : MonoBehaviour
 {
 
     [Header("Ink JSON")]
-    [SerializeField] private TextAsset inkJSON;
-
-
+    public TextAsset inkJSON;
     [SerializeField] private Text icon;
     private Text[] studentUI;
     private bool isHighlighted = false;
@@ -18,7 +16,8 @@ public class NewStudentBehaviour : MonoBehaviour
 
     //StudentNum starts at 10 and can only be changed if it equals 10, meaning it can be changed
     //once and otherwise is read-only
-    [SerializeField]private int studentNum = 10;
+    private string studentName;
+    private int studentNum = 10;
     public int StudentNum
     {
         get {return studentNum;}
@@ -26,6 +25,7 @@ public class NewStudentBehaviour : MonoBehaviour
         {
             if (studentNum == 10)
             {
+                //studentName = studentManager.studentNames[value];
                 studentNum = value;
             }
         }
@@ -63,7 +63,7 @@ public class NewStudentBehaviour : MonoBehaviour
     {
         get
         {return currentBehaviour;}
-        set
+        private set
         {
             switch (currentBehaviour)
             {
@@ -172,6 +172,26 @@ public class NewStudentBehaviour : MonoBehaviour
     [SerializeField] private List<Behaviours> chance = new List<Behaviours>();
 
 
+
+//                                 /\
+//                                /__\
+//       VARIABLES + PROPERTIES    ||
+//                                 ||
+
+
+    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+
+//                                 ||
+//              METHODS            ||
+//                                \--/
+//                                 \/
+
+
+
+
     //private int methodCalled = 0;
 
     //gets info displays (debugging and ui), resets LearningPoints, sets currentBehaviour to normal,
@@ -192,13 +212,13 @@ public class NewStudentBehaviour : MonoBehaviour
 
         hasHandBeenUp = false;
 
-        SetUpDisplay(StudentNum);
+        SetUpDisplay(studentName);
     }
 
     //initializes display once SDM has set everything up
-    public void SetUpDisplay(int number)
+    public void SetUpDisplay(string name)
     {
-        studentUI[4].text = "Student " + number.ToString();
+        studentUI[4].text = name;
     }
 
     //calls RefreshChance for each behaviour
@@ -281,15 +301,15 @@ public class NewStudentBehaviour : MonoBehaviour
         icon.text = CurrentBehaviour.ToString();
 
 
-        /*if (isHighlighted)
+        if (isHighlighted)
         {
-            icon.color = Color.red;
+            studentUI[4].color = Color.red;
         }
         else
         {
-            icon.color = Color.white;
-        }*/
-        studentUI[1].enabled = isHighlighted;
+            studentUI[4].color = Color.white;
+        }
+        //studentUI[1].enabled = isHighlighted;
         studentUI[2].text = LearningPoints.ToString();
         studentUI[3].text = TalkChance.ToString();
     }
@@ -297,17 +317,23 @@ public class NewStudentBehaviour : MonoBehaviour
     // is called by the interaction manager for this student whenever it is interacted with
     public void Interact()
     {
-        DialogueManager.instance.EnterDialogueMode(inkJSON);
+        DialogueManager.instance.EnterDialogueMode(inkJSON, this);
+    }
+
+    public void FinishDialogue(bool hook)
+    {
         if (CurrentBehaviour == Behaviours.handUp)
         {
-            LearningPoints = LearningPoints + AnswerBonus;
-            studentManager.AnsweredMyQuestion();
+            HandUpAnswered();
         }
-        if (CurrentBehaviour == hookBehaviour)
-        {
-            hookDiscovered = true;
-        }
+        hookDiscovered = hook;
         CurrentBehaviour = Behaviours.normal;
+    }
+
+    public void HandUpAnswered()
+    {
+        LearningPoints = LearningPoints + AnswerBonus;
+        studentManager.AnsweredMyQuestion();
     }
     
     //makes the student ui indicate when in range of interaction 
