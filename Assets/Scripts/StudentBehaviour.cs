@@ -15,14 +15,13 @@ public class StudentBehaviour : MonoBehaviour
     [SerializeField] private SlideManager lesson;
 
     [SerializeField] private Text icon;
-    private Text[] studentUI;
     [SerializeField] private int sleepChance = 3;
     [SerializeField] private int talkChance = 4;
     [SerializeField] private int handUpChance = 1;
     [SerializeField] private int inconsistency = 0;
     
     //how many behaviours you need to expect 1 behaviour per lesson.
-    private float onePerLesson = 6f;
+    private float timesInLesson = 9f;
     
     private int totalChance;
     private float behaviourFreq;
@@ -33,10 +32,8 @@ public class StudentBehaviour : MonoBehaviour
 
     void Start()
     {
-        studentUI = icon.GetComponentsInChildren<Text>();
-
         totalChance = sleepChance + talkChance + handUpChance;
-        behaviourFreq = (onePerLesson / (float)totalChance) * 100f;
+        behaviourFreq = (timesInLesson / (float)totalChance) * 100f;
 
         minTime = Mathf.Clamp(1f, behaviourFreq - inconsistency, 150f);
         maxTime = Mathf.Clamp(1f, behaviourFreq + inconsistency, 150f);
@@ -95,7 +92,6 @@ public class StudentBehaviour : MonoBehaviour
         {
             icon.color = Color.white;
         }
-        //studentUI[1].enabled = isHighlighted;
     }
 
     public string GetBehaviour()
