@@ -5,23 +5,11 @@ using UnityEngine.UI;
 
 public class StudentBehaviour : MonoBehaviour
 {
-    public enum Behaviours
-    {
-        Normal,
-        Sleeping,
-        Talking,
-        HandUp,
-        
-        Clear
-    }
-
-
     private float learningSpeed;
-
     private float pointInLesson = 0f;
     private float lastPointInLesson = 0f;
-    private Behaviours currentBehaviour;
-    private Behaviours newBehaviour;
+    private string currentBehaviour;
+    private string newBehaviour;
     private bool isHighlighted = false;
 
     [SerializeField] private SlideManager lesson;
@@ -37,12 +25,10 @@ public class StudentBehaviour : MonoBehaviour
     
     private int totalChance;
     private float behaviourFreq;
-    [SerializeField] private Behaviours[] behaviorChance;
+    [SerializeField] private string[] behaviorChance;
     [SerializeField] private float minTime;
     [SerializeField] private float maxTime;
     private float behaviourPointInLesson = 0f;
-
-    
 
     void Start()
     {
@@ -53,19 +39,19 @@ public class StudentBehaviour : MonoBehaviour
         maxTime = Mathf.Clamp(1f, behaviourFreq + inconsistency, 150f);
         Debug.Log(minTime + "   " + maxTime);
 
-        behaviorChance = new Behaviours[totalChance];
+        behaviorChance = new string[totalChance];
 
         for (int i = 0; i < sleepChance; i++)
         {
-            behaviorChance[i] = Behaviours.Sleeping;
+            behaviorChance[i] = "sleeping";
         }
         for (int i = sleepChance; i < (sleepChance + talkChance); i++)
         {
-            behaviorChance[i] = Behaviours.Talking;
+            behaviorChance[i] = "talking";
         }
         for (int i = (sleepChance + talkChance); i < totalChance; i++)
         {
-            behaviorChance[i] = Behaviours.HandUp;
+            behaviorChance[i] = "handUp";
         }
 
         SetNormal();
@@ -74,9 +60,9 @@ public class StudentBehaviour : MonoBehaviour
     void Update()
     {
         lastPointInLesson = pointInLesson;
-        pointInLesson = lesson.SlidePercent;
+        pointInLesson = lesson.GetSlidePercent();
 
-        if (currentBehaviour == Behaviours.Normal)
+        if (currentBehaviour == "normal")
         {
             if ((lastPointInLesson < behaviourPointInLesson) && (behaviourPointInLesson < pointInLesson))
             {
@@ -84,8 +70,20 @@ public class StudentBehaviour : MonoBehaviour
             }
         }
 
-        Debug.Log(currentBehaviour);
-        icon.text = currentBehaviour.ToString();
+        if (newBehaviour == "sleeping")
+        {
+            SetSleeping();
+        }
+        else if (newBehaviour == "talking")
+        {
+            SetTalking();
+        }
+        else if (newBehaviour == "handUp")
+        {
+            SetHandUp();
+        }
+        newBehaviour = "";
+        icon.text = currentBehaviour;
         if (isHighlighted)
         {
             icon.color = Color.red;
@@ -96,24 +94,15 @@ public class StudentBehaviour : MonoBehaviour
         }
     }
 
-    public Behaviours GetBehaviour()
+    public string GetBehaviour()
     {
         return currentBehaviour;
-    }
-
-    public void Interact()
-    {
-        if (currentBehaviour != Behaviours.Normal)
-        {
-            SetNormal();
-        }
     }
 
     public void SetNormal()
     {
         learningSpeed = 1f;
-        currentBehaviour = Behaviours.Normal;
-        Debug.Log("set normal");
+        currentBehaviour = "normal";
         behaviourPointInLesson = 100f;
         while (behaviourPointInLesson == 100f)
         {
@@ -125,19 +114,19 @@ public class StudentBehaviour : MonoBehaviour
     public void SetSleeping()
     {
         learningSpeed = 0f;
-        currentBehaviour = Behaviours.Sleeping;
+        currentBehaviour = "sleeping";
     }
 
     public void SetTalking()
     {
         learningSpeed = 0.25f;
-        currentBehaviour = Behaviours.Talking;
+        currentBehaviour = "talking";
     }
 
     public void SetHandUp()
     {
         learningSpeed = 0.75f;
-        currentBehaviour = Behaviours.HandUp;
+        currentBehaviour = "handUp";
     }
     public void IconHighlight(bool highlight)
     {
