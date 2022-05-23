@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SlideManager : MonoBehaviour
 {
     private bool isInRadius;
-    public float teachingSpeed;
+    [SerializeField] private float teachingSpeed;
     [SerializeField] private float slidePercent = 0f;
     
     //set: slidePercent cannot be set above 100 or below 0
@@ -18,7 +18,7 @@ public class SlideManager : MonoBehaviour
         }
         private set
         {
-            slidePercent = Mathf.Clamp(value, 0f, 100f);
+            slidePercent = Mathf.Clamp(0f, value, 100f);
         }
     }
 
@@ -27,7 +27,7 @@ public class SlideManager : MonoBehaviour
     private float difference;
     [SerializeField] private StudentDataManager studentManager;
     [SerializeField] private int slideNum = 0;
-    public int slideTotal;
+    [SerializeField] private int slideTotal = 10;
     private int nextSlide = 0;
 
     [SerializeField] private Text slideNumView;

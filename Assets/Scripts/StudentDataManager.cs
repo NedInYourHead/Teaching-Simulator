@@ -14,13 +14,11 @@ public class StudentDataManager : MonoBehaviour
     */
 
     [SerializeField] private NewStudentBehaviour[] students;
-    [SerializeField] private int generalSleepChanceMax;
-    [SerializeField] private int generalTalkChanceMax;
-    [SerializeField] private int generalHandUpChanceMax;
+    [SerializeField] private int generalSleepChanceMax = 40;
+    [SerializeField] private int generalTalkChanceMax = 20;
+    [SerializeField] private int generalHandUpChanceMax = 20;
     [SerializeField] private int conversationContagion = 100;
     [SerializeField] private float classQuestionBonus = 5f;
-    [SerializeField] private TextAsset inkJSON;
-    public string[] studentNames;
     private int talkModifier = 0;
 
     void Awake()
@@ -32,9 +30,8 @@ public class StudentDataManager : MonoBehaviour
             students[i].SleepChance += Random.Range(0, generalSleepChanceMax);
             students[i].TalkChance += Random.Range(0, generalTalkChanceMax);
             students[i].HandUpChance += Random.Range(0, generalHandUpChanceMax);
-            students[i].inkJSON = inkJSON;
             students[i].StudentNum = i;
-            students[i].HookDiscovered = false;
+            students[i].HookDiscovered = RetainedData.hookDiscovered[i];
         }
     }
 

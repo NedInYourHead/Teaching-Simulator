@@ -9,21 +9,10 @@ public class DialogueManager : MonoBehaviour
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
-    [SerializeField] private TextMeshProUGUI nameText;
-
-    [Header("Choices UI")]
-    [SerializeField] private GameObject[] choices;
-    private TextMeshProUGUI[] choicesText;
-
-    private bool hookDiscovered = false;
 
     private Story currentStory;
 
-    private NewStudentBehaviour currentStudent;
-
     public bool dialogueIsPlaying {get; private set;}
-    
-    public int choiceNum {get; private set;}
 
     public static DialogueManager instance {get; private set;}
 
@@ -40,33 +29,35 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
+    }
 
-        choicesText = new TextMeshProUGUI[choices.Length];
-        
-        for (int i = 0; i < choices.Length; i++)
+    void Update()
+    {
+        if (!dialogueIsPlaying)
         {
-            choicesText[i] = choices[i].GetComponentInChildren<TextMeshProUGUI>();
-            choicesText[i].text = "";
+            return;
+        }
+        
+        if (Input.GetAxis("Fire1") > 0)
+        {
+            ContinueStory();
         }
     }
 
-    public void EnterDialogueMode(TextAsset inkJSON, NewStudentBehaviour thisStudent)
+    public void EnterDialogueMode(TextAsset inkJSON)
     {
         currentStory = new Story(inkJSON.text);
-        //set all the variables here
-        currentStory.variablesState["myBehaviour"] = "-> "+ thisStudent.CurrentBehaviour.ToString();
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
-        currentStudent = thisStudent;
+
         ContinueStory();
     }
 
-    public void ContinueStory()
+    private void ContinueStory()
     {
         if (currentStory.canContinue)
         {
             dialogueText.text = currentStory.Continue();
-            DisplayChoices();
         }
         else
         {
@@ -74,44 +65,10 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void DisplayChoices()
-    {
-        List<Choice> currentChoices = currentStory.currentChoices;
-
-        choiceNum = currentChoices.Count;
-
-        if (currentChoices.Count > choices.Length)
-        {
-            Debug.LogError("too many choices in story");
-        }
-
-        for (int i = 0; i < choices.Length; i++)
-        {
-            Debug.Log((i < (currentChoices.Count)).ToString() + i.ToString());
-            if (i < (currentChoices.Count))
-            {
-                choices[i].gameObject.SetActive(true);
-                choicesText[i].text = currentChoices[i].text;
-            }
-            else
-            {
-                choices[i].gameObject.SetActive(false);
-            }
-        }
-    }
-
-    public void MakeChoice(int decision)
-    {
-        currentStory.ChooseChoiceIndex(decision);
-        ContinueStory();
-    }
-
     private void ExitDialogueMode()
     {
-        //dialogueText.text = "";
-        currentStudent.FinishDialogue(hookDiscovered);
-        currentStudent = null;
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
+        dialogueText.text = "";
     }
 }
