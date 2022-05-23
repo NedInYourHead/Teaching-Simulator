@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class InteractionManager : MonoBehaviour
 {
-    StudentBehaviour behaviour;
+    NewStudentBehaviour behaviour;
     BoxCollider2D triggerBox;
     private bool isTouching;
+    public static float timer;
 
-    private void Start()
+    private void Awake()
     {
-        behaviour = GetComponentInParent<StudentBehaviour>();
+        behaviour = GetComponentInParent<NewStudentBehaviour>();
         triggerBox = GetComponent<BoxCollider2D>();
+        isTouching = false;
+        timer = 0f;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -25,9 +28,17 @@ public class InteractionManager : MonoBehaviour
 
     void Update()
     {
-        if (isTouching && behaviour.GetBehaviour() != "normal" && (Input.GetAxis("Fire1") > 0))
+        if (isTouching && (Input.GetAxis("Fire1") > 0) && (timer <= 0f))
         {
-            behaviour.SetNormal();
+            timer += 0.5f;
+            behaviour.Interact();
+        }
+        else
+        {
+            if((timer > 0f))
+            {
+                timer -= Time.deltaTime;
+            }
         }
         behaviour.IconHighlight(isTouching);
     }

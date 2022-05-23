@@ -18,7 +18,7 @@ public class MoveToForeground : MonoBehaviour
         {
             for (int i = 0; i < childrenRenderers.Length; i++)
             {
-                childrenRenderers[i].sortingOrder = teacherSortOrder + 1;
+                childrenRenderers[i].sortingOrder += 2;
             }
         }
     }
@@ -28,7 +28,7 @@ public class MoveToForeground : MonoBehaviour
         {
             for (int i = 0; i < childrenRenderers.Length; i++)
             {
-                childrenRenderers[i].sortingOrder = teacherSortOrder - 1;
+                childrenRenderers[i].sortingOrder -= 2;
             }
         }
     }
