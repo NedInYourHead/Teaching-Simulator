@@ -35,18 +35,12 @@ public class TeacherController : MonoBehaviour
 
     void FixedUpdate()
     {
-        horizontal = Input.GetAxis("Horizontal");
-
-        vertical = Input.GetAxis("Vertical");
-
-        if (DialogueManager.instance.dialogueIsPlaying)
-        {
-            horizontal = 0f;
-            vertical = 0f;
-        }
 
         // the reason this part is so complex is because it only lets you move in x OR y and prioritises the direction you're NOT holding.
         // probably need to clean it up and make it more elegant
+        horizontal = Input.GetAxis("Horizontal");
+
+        vertical = Input.GetAxis("Vertical");
 
         if (horizontal == 0f)
         {
@@ -95,5 +89,25 @@ public class TeacherController : MonoBehaviour
     void Update()
     {
         teacherRenderer.sortingOrder = shadowRenderer.sortingOrder;
+    }
+    
+    void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.tag == "LayerBack")
+        {
+            shadowRenderer.sortingOrder = -6;
+        }
+        else if (collider.tag == "LayerMiddle")
+        {
+            shadowRenderer.sortingOrder = -4;
+        }
+        else if (collider.tag == "LayerForward")
+        {
+            shadowRenderer.sortingOrder = -2;
+        }
+        else if (collider.tag == "LayerFront")
+        {
+            shadowRenderer.sortingOrder = 0;
+        }
     }
 }
