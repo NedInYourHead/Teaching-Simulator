@@ -23,8 +23,8 @@ public class ClockManager : MonoBehaviour
         if (currentSeconds > lessonLengthSeconds && inLesson)
         {
             studentDataManager.EndLesson();
-            //UnityEngine.SceneManagement.SceneManager.LoadScene(2);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            //UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
         else
         {

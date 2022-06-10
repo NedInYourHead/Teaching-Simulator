@@ -54,7 +54,6 @@ public class DialogueManager : MonoBehaviour
     {
         currentStory = new Story(inkJSON.text);
         //set all the variables here
-        currentStory.variablesState["myBehaviour"] = "-> "+ thisStudent.CurrentBehaviour.ToString();
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
         currentStudent = thisStudent;
