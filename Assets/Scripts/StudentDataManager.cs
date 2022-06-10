@@ -96,6 +96,7 @@ public class StudentDataManager : MonoBehaviour
         {
             RetainedData.studentCurriculum[i] += students[i].LearningPoints;
             RetainedData.hookDiscovered[i] = students[i].HookDiscovered;
+            RetainedData.studentNames[i] = students[i].studentName;
         }
     }
 }

@@ -26,11 +26,11 @@ public class ScoreDisplay : MonoBehaviour
         averageScore = averageScore/9;
 
         scores = GetComponentsInChildren<Text>();
-        scores[1].text = averageScore.ToString() + "%";
-        scores[2].text = "Student " + highest;
-        scores[3].text = RetainedData.studentCurriculum[highest].ToString() + "%";
-        scores[4].text = "Student " + lowest.ToString();
-        scores[5].text = RetainedData.studentCurriculum[lowest].ToString() + "%";
+        scores[1].text = averageScore.ToString("F1") + "%";
+        scores[2].text = RetainedData.studentNames[highest];
+        scores[3].text = RetainedData.studentCurriculum[highest].ToString("F1") + "%";
+        scores[4].text = RetainedData.studentNames[lowest];
+        scores[5].text = RetainedData.studentCurriculum[lowest].ToString("F1") + "%";
     }
 
     void Update()

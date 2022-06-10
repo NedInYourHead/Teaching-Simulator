@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class ChangeScene : MonoBehaviour
 {
+	[SerializeField] private int nextScene = 0;
+	[SerializeField] private string key = "return";
+
 	void Update()
 	{
-		if (Input.GetKeyDown("return"))
+		if (Input.GetKeyDown(key))
 		{
-			UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+			UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
 		}
 	}
 }

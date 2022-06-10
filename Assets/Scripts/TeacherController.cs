@@ -28,7 +28,7 @@ public class TeacherController : MonoBehaviour
     {
         if (currentState == newState)
         {
-            animator.Play(newState);
+            animator.Play(currentState);
         }
         currentState = newState;
     }
@@ -38,12 +38,6 @@ public class TeacherController : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
 
         vertical = Input.GetAxis("Vertical");
-
-        if (DialogueManager.instance.dialogueIsPlaying)
-        {
-            horizontal = 0f;
-            vertical = 0f;
-        }
 
         // the reason this part is so complex is because it only lets you move in x OR y and prioritises the direction you're NOT holding.
         // probably need to clean it up and make it more elegant
@@ -83,8 +77,8 @@ public class TeacherController : MonoBehaviour
         }
         if ((horizontal == 0f) && (vertical == 0f))
         {
-            animator.Play(currentState);
             animator.speed = 0f;
+            animator.Play(currentState);
         }
         else
         {

@@ -12,13 +12,19 @@ public class NewStudentBehaviour : MonoBehaviour
 
     [SerializeField] private Text icon;
     private Text[] studentUI;
+    private Slider learningSlider;
+
+    public Animator animator;
+    private string currentState;
+
     private bool isHighlighted = false;
 
     private StudentDataManager studentManager;
 
     //StudentNum starts at 10 and can only be changed if it equals 10, meaning it can be changed
     //once and otherwise is read-only
-    [SerializeField]private int studentNum = 10;
+    [SerializeField] private int studentNum = 10;
+    public string studentName;
     public int StudentNum
     {
         get {return studentNum;}
@@ -53,7 +59,7 @@ public class NewStudentBehaviour : MonoBehaviour
         get {return learningPoints;}
         set
         {
-            learningPoints = Mathf.Clamp(0f, value, 100f);
+            learningPoints = Mathf.Min(value, 100f);
         }
     }
 
@@ -105,6 +111,7 @@ public class NewStudentBehaviour : MonoBehaviour
                     break;
             }
             currentBehaviour = value;
+            PlayAnim((value.ToString()) + (studentNum.ToString()));
         }
     }
 
@@ -127,7 +134,7 @@ public class NewStudentBehaviour : MonoBehaviour
     [SerializeField] private int talkChance = 0;
     private int handUpChance = 0;
     [SerializeField] private float handUpConfidence = 0.4f;
-    [SerializeField] private float handUpThreshold = 0.075f;
+    [SerializeField] private float handUpThreshold = 10f;
     [SerializeField] private float handUpPatience = 2.5f;
     [SerializeField] private float handDownDiscouragement = 0.8f;
     [SerializeField] private int handDownSleepChance = 50;
@@ -177,10 +184,17 @@ public class NewStudentBehaviour : MonoBehaviour
     //gets info displays (debugging and ui), resets LearningPoints, sets currentBehaviour to normal,
     //Sets learningSpeed to 1, sets totalbehaviours to the total of all chances, refreshes chance,
     //then gets studentDataManager
-    void Start()
+    void Awake()
     {
         studentUI = icon.GetComponentsInChildren<Text>();
+        learningSlider = icon.GetComponentInChildren<Slider>();
 
+        animator = GetComponentInChildren<Animator>();
+    }
+
+
+    void Start()
+    {
         LearningPoints = 0f;
 
         CurrentBehaviour = Behaviours.normal;
@@ -198,7 +212,7 @@ public class NewStudentBehaviour : MonoBehaviour
     //initializes display once SDM has set everything up
     public void SetUpDisplay(int number)
     {
-        studentUI[4].text = "Student " + number.ToString();
+        studentUI[4].text = studentName;
     }
 
     //calls RefreshChance for each behaviour
@@ -227,11 +241,11 @@ public class NewStudentBehaviour : MonoBehaviour
     //adds learning points and chooses whether to set a behaviour based on chance values
     public void EachPercent()
     {
-        if ((handUpPatience > 0) && (CurrentBehaviour == Behaviours.handUp))
+        if ((handUpTimer > 0) && (CurrentBehaviour == Behaviours.handUp))
         {
-            handUpPatience -= 1f;
+            handUpTimer -= 1f;
         }
-        else if ((handUpPatience <= 0) && (CurrentBehaviour == Behaviours.handUp))
+        else if ((handUpTimer <= 0) && (CurrentBehaviour == Behaviours.handUp))
         {
             RunOutOfPatience();
         }
@@ -290,7 +304,7 @@ public class NewStudentBehaviour : MonoBehaviour
             icon.color = Color.white;
         }*/
         studentUI[1].enabled = isHighlighted;
-        studentUI[2].text = LearningPoints.ToString();
+        learningSlider.value = LearningPoints;
         studentUI[3].text = TalkChance.ToString();
     }
 
@@ -310,9 +324,16 @@ public class NewStudentBehaviour : MonoBehaviour
         CurrentBehaviour = Behaviours.normal;
     }
     
-    //makes the student ui indicate when in range of interaction 
+    //makes the student ui indicate when in range of interaction
     public void IconHighlight(bool highlight)
     {
         isHighlighted = highlight;
+    }
+
+    void PlayAnim(string newState)
+    {
+        currentState = newState;
+        animator.Play(currentState);
+        Debug.Log(studentNum.ToString());
     }
 }

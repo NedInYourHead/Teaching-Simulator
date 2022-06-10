@@ -12,6 +12,7 @@ public class ClockManager : MonoBehaviour
     private float rotationAmount;
     private bool inLesson = true;
     [SerializeField] private StudentDataManager studentDataManager;
+    [SerializeField] private int nextScene = 0;
 
     void Start()
     {
@@ -23,8 +24,7 @@ public class ClockManager : MonoBehaviour
         if (currentSeconds > lessonLengthSeconds && inLesson)
         {
             studentDataManager.EndLesson();
-            //UnityEngine.SceneManagement.SceneManager.LoadScene(2);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
         }
         else
         {
